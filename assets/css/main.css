@@ -122,12 +122,6 @@ input, select, textarea {
 			border-color: transparent;
 		}
 
-		.subtext {
-		  font-size: 0.85em;
- 		 opacity: 0.75;
-		  margin-top: 0.5em;
-  		text-align: center;
-		}
 
 /* Icon */
 
@@ -1086,3 +1080,30 @@ input, select, textarea {
 		#header nav {
 			padding: 0 1em;
 		} }
+
+
+/* Subtext */
+p.subtext, .subtext {
+  font-size: 0.85em !important;
+  opacity: 0.75;
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+/* Icons */
+ul.icons {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 2em 0;
+}
+
+ul.icons li {
+  display: flex;
+  align-items: center;
+}
+
+
