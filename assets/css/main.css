@@ -122,6 +122,13 @@ input, select, textarea {
 			border-color: transparent;
 		}
 
+		.subtext {
+		  font-size: 0.85em;
+ 		 opacity: 0.75;
+		  margin-top: 0.5em;
+  		text-align: center;
+		}
+
 /* Icon */
 
 	.icon {
