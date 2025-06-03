@@ -1082,21 +1082,21 @@ input, select, textarea {
 		} }
 
 
-/* Subtext */
-p.subtext, .subtext {
-  font-size: clamp(0.65em, 0.95vw, 0.85em) !important; /* min, ideal, max */
-  opacity: 0.75;
-  margin-top: 0.5em;
-  text-align: center;
-}
-
 /* Headline */
 p.headline, .headline {
-  font-size: clamp(0.75em, 1.0vw, 1.25em) !important; /* min, ideal, max */
-  opacity: 0.75;
-  margin-top: 0.5em;
-  text-align: center;
+  font-size: clamp(0.85em, 7vw, 1.2em) !important; 
+  white-space: normal;                   
+  max-width: 100%;
 }
+
+
+/* Subtext */
+p.subtext, .subtext {
+  font-size: clamp(0.75em, 7vw, 1.0em) !important; 
+  white-space: normal;                   
+  max-width: 100%;
+}
+
 
 
 /* Icons */
