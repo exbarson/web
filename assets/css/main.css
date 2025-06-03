@@ -1092,7 +1092,7 @@ p.subtext, .subtext {
 
 /* Headline */
 p.headline, .headline {
-  font-size: clamp(0.85em, 1.0vw, 1.25em); /* min, ideal, max */
+  font-size: clamp(0.85em, 1.0vw, 1.25em) !important; /* min, ideal, max */
   opacity: 0.75;
   margin-top: 0.5em;
   text-align: center;
