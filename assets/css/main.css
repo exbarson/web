@@ -1084,7 +1084,7 @@ input, select, textarea {
 
 /* Headline */
 p.headline, .headline {
-  font-size: clamp(0.85em, 7vw, 1.2em) !important; 
+  font-size: clamp(0.85em, 7.0vw, 1.2em) !important; 
   white-space: normal;                   
   max-width: 100%;
 }
@@ -1092,7 +1092,7 @@ p.headline, .headline {
 
 /* Subtext */
 p.subtext, .subtext {
-  font-size: clamp(0.75em, 7vw, 1.0em) !important; 
+  font-size: clamp(0.75em, 7.0vw, 1.0em) !important; 
   white-space: normal;                   
   max-width: 100%;
 }
