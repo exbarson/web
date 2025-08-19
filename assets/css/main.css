@@ -229,11 +229,11 @@ input, select, textarea {
   -ms-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
 
-  /* Fallback (JPEG), jak čeká šablona */
+  /* Fallback (JPEG) */
   background-color: #000010;
   background-position: bottom left;
   background-repeat: repeat-x;
-  background-size: 3000px auto;       /* šířka jednoho „dílku“ = 3000 px */
+  background-size: 2000px auto;       /* šířka jednoho dílku = 2000 px */
   background-image: url("images/bg.jpg");
 
   height: 100%;
@@ -242,8 +242,8 @@ input, select, textarea {
   position: fixed;
   top: 0;
 
-  /* pruh má šířku přes 3 „dílky“ kvůli plynulé smyčce */
-  width: 9000px;
+  /* pruh má šířku přes 3 dílky kvůli smyčce */
+  width: 6000px;
 }
 
 /* Moderní prohlížeče: preferuj WebP (přepíše jen obrázek) */
@@ -254,65 +254,25 @@ input, select, textarea {
   );
 }
 
-/* Posun přesně o šířku jednoho dílku (3000 px) = bezešvá smyčka */
+/* Posun přesně o šířku jednoho dílku (2000 px) = bezešvá smyčka */
 @-moz-keyframes bg {
-  0% {
-    -moz-transform: translate3d(0,0,0);
-    -webkit-transform: translate3d(0,0,0);
-    -ms-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-  }
-  100% {
-    -moz-transform: translate3d(-3000px,0,0);
-    -webkit-transform: translate3d(-3000px,0,0);
-    -ms-transform: translate3d(-3000px,0,0);
-    transform: translate3d(-3000px,0,0);
-  }
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-2000px,0,0); }
 }
 
 @-webkit-keyframes bg {
-  0% {
-    -moz-transform: translate3d(0,0,0);
-    -webkit-transform: translate3d(0,0,0);
-    -ms-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-  }
-  100% {
-    -moz-transform: translate3d(-3000px,0,0);
-    -webkit-transform: translate3d(-3000px,0,0);
-    -ms-transform: translate3d(-3000px,0,0);
-    transform: translate3d(-3000px,0,0);
-  }
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-2000px,0,0); }
 }
 
 @-ms-keyframes bg {
-  0% {
-    -moz-transform: translate3d(0,0,0);
-    -webkit-transform: translate3d(0,0,0);
-    -ms-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-  }
-  100% {
-    -moz-transform: translate3d(-3000px,0,0);
-    -webkit-transform: translate3d(-3000px,0,0);
-    -ms-transform: translate3d(-3000px,0,0);
-    transform: translate3d(-3000px,0,0);
-  }
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-2000px,0,0); }
 }
 
 @keyframes bg {
-  0% {
-    -moz-transform: translate3d(0,0,0);
-    -webkit-transform: translate3d(0,0,0);
-    -ms-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-  }
-  100% {
-    -moz-transform: translate3d(-3000px,0,0);
-    -webkit-transform: translate3d(-3000px,0,0);
-    -ms-transform: translate3d(-3000px,0,0);
-    transform: translate3d(-3000px,0,0);
-  }
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-2000px,0,0); }
 }
 
 /* Respektuj omezení pohybu u uživatelů */
@@ -324,6 +284,7 @@ input, select, textarea {
     animation: none !important;
   }
 }
+
 
 
 /* Overlay */
