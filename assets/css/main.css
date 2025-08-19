@@ -212,98 +212,119 @@ input, select, textarea {
 
 /* BG */
 
-	#bg {
-		-moz-animation: bg 60s linear infinite;
-		-webkit-animation: bg 60s linear infinite;
-		-ms-animation: bg 60s linear infinite;
-		animation: bg 60s linear infinite;
-		-moz-backface-visibility: hidden;
-		-webkit-backface-visibility: hidden;
-		-ms-backface-visibility: hidden;
-		backface-visibility: hidden;
-		-moz-transform: translate3d(0,0,0);
-		-webkit-transform: translate3d(0,0,0);
-		-ms-transform: translate3d(0,0,0);
-		transform: translate3d(0,0,0);
-	/* Set your background with this */
+#bg {
+  /* animace posunu pozadí */
+  -moz-animation: bg 60s linear infinite;
+  -webkit-animation: bg 60s linear infinite;
+  -ms-animation: bg 60s linear infinite;
+  animation: bg 60s linear infinite;
 
-		background: #348cb2 url("images/bg.jpg") bottom left;
-		background-repeat: repeat-x;
-		height: 100%;
-		left: 0;
-		opacity: 1;
-		position: fixed;
-		top: 0;
-	}
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
 
-	@-moz-keyframes bg {
-		0% {
-			-moz-transform: translate3d(0,0,0);
-			-webkit-transform: translate3d(0,0,0);
-			-ms-transform: translate3d(0,0,0);
-			transform: translate3d(0,0,0);
-		}
+  -moz-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
 
-		100% {
-			-moz-transform: translate3d(-2250px,0,0);
-			-webkit-transform: translate3d(-2250px,0,0);
-			-ms-transform: translate3d(-2250px,0,0);
-			transform: translate3d(-2250px,0,0);
-		}
-	}
+  /* Fallback (JPEG), jak čeká šablona */
+  background-color: #000010;
+  background-position: bottom left;
+  background-repeat: repeat-x;
+  background-size: 3000px auto;       /* šířka jednoho „dílku“ = 3000 px */
+  background-image: url("images/bg.jpg");
 
-	@-webkit-keyframes bg {
-		0% {
-			-moz-transform: translate3d(0,0,0);
-			-webkit-transform: translate3d(0,0,0);
-			-ms-transform: translate3d(0,0,0);
-			transform: translate3d(0,0,0);
-		}
+  height: 100%;
+  left: 0;
+  opacity: 1;
+  position: fixed;
+  top: 0;
 
-		100% {
-			-moz-transform: translate3d(-2250px,0,0);
-			-webkit-transform: translate3d(-2250px,0,0);
-			-ms-transform: translate3d(-2250px,0,0);
-			transform: translate3d(-2250px,0,0);
-		}
-	}
+  /* pruh má šířku přes 3 „dílky“ kvůli plynulé smyčce */
+  width: 9000px;
+}
 
-	@-ms-keyframes bg {
-		0% {
-			-moz-transform: translate3d(0,0,0);
-			-webkit-transform: translate3d(0,0,0);
-			-ms-transform: translate3d(0,0,0);
-			transform: translate3d(0,0,0);
-		}
+/* Moderní prohlížeče: preferuj WebP (přepíše jen obrázek) */
+#bg {
+  background-image: image-set(
+    url("images/bg.webp") type("image/webp") 1x,
+    url("images/bg.jpg")  type("image/jpeg") 1x
+  );
+}
 
-		100% {
-			-moz-transform: translate3d(-2250px,0,0);
-			-webkit-transform: translate3d(-2250px,0,0);
-			-ms-transform: translate3d(-2250px,0,0);
-			transform: translate3d(-2250px,0,0);
-		}
-	}
+/* Posun přesně o šířku jednoho dílku (3000 px) = bezešvá smyčka */
+@-moz-keyframes bg {
+  0% {
+    -moz-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+  }
+  100% {
+    -moz-transform: translate3d(-3000px,0,0);
+    -webkit-transform: translate3d(-3000px,0,0);
+    -ms-transform: translate3d(-3000px,0,0);
+    transform: translate3d(-3000px,0,0);
+  }
+}
 
-	@keyframes bg {
-		0% {
-			-moz-transform: translate3d(0,0,0);
-			-webkit-transform: translate3d(0,0,0);
-			-ms-transform: translate3d(0,0,0);
-			transform: translate3d(0,0,0);
-		}
+@-webkit-keyframes bg {
+  0% {
+    -moz-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+  }
+  100% {
+    -moz-transform: translate3d(-3000px,0,0);
+    -webkit-transform: translate3d(-3000px,0,0);
+    -ms-transform: translate3d(-3000px,0,0);
+    transform: translate3d(-3000px,0,0);
+  }
+}
 
-		100% {
-			-moz-transform: translate3d(-2250px,0,0);
-			-webkit-transform: translate3d(-2250px,0,0);
-			-ms-transform: translate3d(-2250px,0,0);
-			transform: translate3d(-2250px,0,0);
-		}
-	}
+@-ms-keyframes bg {
+  0% {
+    -moz-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+  }
+  100% {
+    -moz-transform: translate3d(-3000px,0,0);
+    -webkit-transform: translate3d(-3000px,0,0);
+    -ms-transform: translate3d(-3000px,0,0);
+    transform: translate3d(-3000px,0,0);
+  }
+}
 
-	#bg {
-		background-size: 2250px auto;
-		width: 6750px;
-	}
+@keyframes bg {
+  0% {
+    -moz-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+  }
+  100% {
+    -moz-transform: translate3d(-3000px,0,0);
+    -webkit-transform: translate3d(-3000px,0,0);
+    -ms-transform: translate3d(-3000px,0,0);
+    transform: translate3d(-3000px,0,0);
+  }
+}
+
+/* Respektuj omezení pohybu u uživatelů */
+@media (prefers-reduced-motion: reduce) {
+  #bg {
+    -moz-animation: none !important;
+    -webkit-animation: none !important;
+    -ms-animation: none !important;
+    animation: none !important;
+  }
+}
+
 
 /* Overlay */
 
