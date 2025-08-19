@@ -212,157 +212,78 @@ input, select, textarea {
 
 /* BG */
 
-/* GPU-friendly varianta: dvě pseudo-dlaždice posouvané přes transform.
-   + Fallback pro ultrawide (>= 4000px) na repeat-x kvůli 100% pokrytí. */
-
 #bg {
-  position: fixed;
-  inset: 0;
-  background-color: #000010; /* barva "oblohy" nad pásem fotky */
-  overflow: hidden;
+  /* animace posunu pozadí */
+  -moz-animation: bg 75s linear infinite;
+  -webkit-animation: bg 75s linear infinite;
+  -ms-animation: bg 75s linear infinite;
+  animation: bg 75s linear infinite;
 
-  /* Pseudo-dlaždice se budou hýbat, #bg zůstává statický */
   -moz-backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -ms-backface-visibility: hidden;
   backface-visibility: hidden;
-  will-change: transform;
+
+  -moz-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+
+  /* Fallback (JPEG) */
+  background-color: #000010;
+  background-position: bottom left;
+  background-repeat: repeat-x;
+  background-size: 2000px auto;       /* šířka jednoho dílku = 2000 px */
+  background-image: url("images/bg.jpg");
+
+  height: 100%;
+  left: 0;
+  opacity: 1;
+  position: fixed;
+  top: 0;
+
+  /* pruh má šířku přes 3 dílky kvůli smyčce */
+  width: 6000px;
 }
 
-/* Společné pro obě pseudo-dlaždice (dílek = 2000 x 1000) */
-#bg::before,
-#bg::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  height: 100%;
-  width: 2000px;                       /* šířka jednoho dílku */
-  background-repeat: no-repeat;        /* bez repeat, dlaždicujeme dvěma vrstvami */
-  background-position: bottom left;
-  background-size: 2000px auto;        /* drž šířku dílku, výška dle poměru 2:1 */
-
-  /* WebP + fallback na JPEG (nejdřív explicitní fallback, pak moderní image-set) */
-  background-image: url("images/bg.jpg");
+/* Moderní prohlížeče: preferuj WebP (přepíše jen obrázek) */
+#bg {
   background-image: image-set(
     url("images/bg.webp") type("image/webp") 1x,
     url("images/bg.jpg")  type("image/jpeg") 1x
   );
-
-  /* Plynulý posun jen o šířku dílku (2000 px) */
-  -moz-animation: tile-scroll 60s linear infinite;
-  -webkit-animation: tile-scroll 60s linear infinite;
-  -ms-animation: tile-scroll 60s linear infinite;
-  animation: tile-scroll 60s linear infinite;
-
-  /* pomůcka pro GPU */
-  -moz-transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
 }
 
-/* Levá dlaždice začíná na x = 0 */
-#bg::before { left: 0; }
-
-/* Pravá dlaždice je hned za ní – posun o šířku dílku */
-#bg::after  { left: 2000px; }
-
-/* Obě dlaždice se během cyklu posunou o -2000px, na konci se smyčka resetne:
-   - ::before: 0  -> -2000 (odjede vlevo)
-   - ::after : 2000 -> 0 (přejede na místo první) */
-@-moz-keyframes tile-scroll {
-  0%   { -moz-transform: translate3d(0,0,0); }
-  100% { -moz-transform: translate3d(-2000px,0,0); }
-}
-@-webkit-keyframes tile-scroll {
-  0%   { -webkit-transform: translate3d(0,0,0); }
-  100% { -webkit-transform: translate3d(-2000px,0,0); }
-}
-@-ms-keyframes tile-scroll {
-  0%   { -ms-transform: translate3d(0,0,0); }
-  100% { -ms-transform: translate3d(-2000px,0,0); }
-}
-@keyframes tile-scroll {
-  0%   { transform: translate3d(0,0,0); }
+/* Posun přesně o šířku jednoho dílku (2000 px) = bezešvá smyčka */
+@-moz-keyframes bg {
+  0% { transform: translate3d(0,0,0); }
   100% { transform: translate3d(-2000px,0,0); }
 }
 
-/* Přístupnost: respektuj omezení pohybu */
+@-webkit-keyframes bg {
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-2000px,0,0); }
+}
+
+@-ms-keyframes bg {
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-2000px,0,0); }
+}
+
+@keyframes bg {
+  0% { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-2000px,0,0); }
+}
+
+/* Respektuj omezení pohybu u uživatelů */
 @media (prefers-reduced-motion: reduce) {
-  #bg::before,
-  #bg::after {
-    -moz-animation: none !important;
-    -webkit-animation: none !important;
-    -ms-animation: none !important;
-    animation: none !important;
-    transform: none !important;
-  }
-}
-
-/* ───────────────────────────────────────────────────────────── */
-/* Fallback pro ULTRAWIDE a kompatibilitu:
-   - na extrémně širokých displejích (>= 4000px) vypni pseudo-dlaždice
-   - vrať klasické repeat-x na #bg a animuj background-position
-   - tak vždy pokryješ šířku, i když 2 dlaždice nestačí             */
-@media (min-width: 4000px) {
-  /* vypnout pseudo-dlaždice */
-  #bg::before,
-  #bg::after {
-    display: none !important;
-    -moz-animation: none !important;
-    -webkit-animation: none !important;
-    -ms-animation: none !important;
-    animation: none !important;
-  }
-
-  /* klasický repeat-x přímo na #bg */
   #bg {
-    /* nejdřív fallback JPG, pak moderní image-set */
-    background-image: url("images/bg.jpg");
-    background-image: image-set(
-      url("images/bg.webp") type("image/webp") 1x,
-      url("images/bg.jpg")  type("image/jpeg") 1x
-    );
-    background-position: bottom left;
-    background-repeat: repeat-x;
-    background-size: 2000px auto;
-
-    /* animace posunu textury (pro ultrawide i starší prohlížeče) */
-    -moz-animation: bg-shift 60s linear infinite;
-    -webkit-animation: bg-shift 60s linear infinite;
-    -ms-animation: bg-shift 60s linear infinite;
-    animation: bg-shift 60s linear infinite;
-  }
-
-  @-moz-keyframes bg-shift {
-    0%   { background-position:    0   bottom; }
-    100% { background-position: -2000px bottom; }
-  }
-  @-webkit-keyframes bg-shift {
-    0%   { background-position:    0   bottom; }
-    100% { background-position: -2000px bottom; }
-  }
-  @-ms-keyframes bg-shift {
-    0%   { background-position:    0   bottom; }
-    100% { background-position: -2000px bottom; }
-  }
-  @keyframes bg-shift {
-    0%   { background-position:    0   bottom; }
-    100% { background-position: -2000px bottom; }
-  }
-
-  /* Respektuj omezení pohybu i tady */
-  @media (prefers-reduced-motion: reduce) {
-    #bg {
-      -moz-animation: none !important;
-      -webkit-animation: none !important;
-      -ms-animation: none !important;
-      animation: none !important;
-      background-position: bottom left !important;
-    }
+    -moz-animation: none !important;
+    -webkit-animation: none !important;
+    -ms-animation: none !important;
+    animation: none !important;
   }
 }
-/* ───────────────────────────────────────────────────────────── */
 
 
 
@@ -1175,5 +1096,4 @@ ul.icons li {
   display: flex;
   align-items: center;
 }
-
 
